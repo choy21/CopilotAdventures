@@ -1,0 +1,42 @@
+{
+  "name": "echo-chamber",
+  "version": "1.0.0",
+  "description": "A magical number sequence prediction puzzle - Learn arithmetic progressions through an interactive fantasy-themed application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "web": "node server.js",
+    "test": "node test-suite.js",
+    "demo": "node -e \"const { EchoChamber } = require('./index.js'); const chamber = new EchoChamber(); const result = chamber.predictNext([3, 6, 9, 12]); console.log('Sample Sequence: [3, 6, 9, 12]'); console.log('Result:', result.nextNumber); console.log('Message:', result.message);\""
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": [
+    "arithmetic",
+    "progression",
+    "sequence",
+    "prediction",
+    "puzzle",
+    "educational",
+    "fantasy",
+    "cli",
+    "mathematics"
+  ],
+  "author": "CopilotAdventures Contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/CopilotAdventures"
+  },
+  "bugs": {
+    "url": "https://github.com/microsoft/CopilotAdventures/issues"
+  },
+  "homepage": "https://github.com/microsoft/CopilotAdventures",
+  "bin": {
+    "echo-chamber": "index.js"
+  }
+}

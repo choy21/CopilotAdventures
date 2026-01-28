@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 Chamber of Echoes - Web Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🏰 Chamber of Echoes 🏰</h1>
+                <p class="subtitle">A Magical Number Sequence Prediction Puzzle</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Story Section -->
+            <section class="story-section">
+                <div class="story-card">
+                    <h2>📖 The Story</h2>
+                    <p>You have entered a magical chamber where numbers form patterns. These patterns echo endlessly, and your task is to predict the next number in each sequence. The chamber remembers every echo, storing them in its mystical memory.</p>
+                </div>
+            </section>
+
+            <!-- Two-Column Layout -->
+            <div class="content-wrapper">
+                <!-- Left Column: Prediction Interface -->
+                <section class="prediction-section">
+                    <div class="card">
+                        <h2>🔮 Predict the Next Number</h2>
+                        
+                        <div class="form-group">
+                            <label for="sequenceInput">Enter a sequence of numbers (separated by commas):</label>
+                            <input 
+                                type="text" 
+                                id="sequenceInput" 
+                                placeholder="e.g., 3, 6, 9, 12"
+                                class="input-field"
+                            >
+                            <small class="help-text">Try the demo: <button type="button" class="link-button" onclick="fillDemoSequence()">Use Demo Sequence</button></small>
+                        </div>
+
+                        <button id="predictBtn" class="btn btn-primary" onclick="predictSequence()">
+                            🔮 Predict
+                        </button>
+
+                        <!-- Result Display -->
+                        <div id="resultContainer" class="result-container" style="display: none;">
+                            <div id="resultContent" class="result-content"></div>
+                        </div>
+
+                        <!-- Error Display -->
+                        <div id="errorContainer" class="error-container" style="display: none;">
+                            <div id="errorContent" class="error-content"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Column: Memories & Tests -->
+                <section class="sidebar-section">
+                    <!-- Memories Card -->
+                    <div class="card">
+                        <h2>📜 Echo Memories</h2>
+                        <div id="memoriesContainer" class="memories-container">
+                            <p class="empty-state">No echoes stored yet. Make a prediction!</p>
+                        </div>
+                        <button id="clearMemoriesBtn" class="btn btn-secondary" onclick="clearMemories()" style="width: 100%; margin-top: 1rem;">
+                            🗑️ Clear Memories
+                        </button>
+                    </div>
+
+                    <!-- Actions Card -->
+                    <div class="card">
+                        <h2>⚡ Quick Actions</h2>
+                        <button class="btn btn-outline" onclick="runDemoTest()">🧪 Run Test</button>
+                        <button class="btn btn-outline" onclick="showExamples()">📚 Show Examples</button>
+                        <button class="btn btn-outline" onclick="testConnection()">🔗 Test Server</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Examples Section (Initially Hidden) -->
+            <section id="examplesSection" class="examples-section" style="display: none;">
+                <div class="card">
+                    <h2>📚 Example Sequences</h2>
+                    <div class="examples-grid">
+                        <div class="example-item" onclick="loadExample([3, 6, 9, 12])">
+                            <strong>[3, 6, 9, 12]</strong>
+                            <small>Simple +3</small>
+                        </div>
+                        <div class="example-item" onclick="loadExample([10, 7, 4, 1])">
+                            <strong>[10, 7, 4, 1]</strong>
+                            <small>Decreasing</small>
+                        </div>
+                        <div class="example-item" onclick="loadExample([2, 4, 6, 8])">
+                            <strong>[2, 4, 6, 8]</strong>
+                            <small>Even numbers</small>
+                        </div>
+                        <div class="example-item" onclick="loadExample([-5, -3, -1, 1])">
+                            <strong>[-5, -3, -1, 1]</strong>
+                            <small>Negative start</small>
+                        </div>
+                        <div class="example-item" onclick="loadExample([100, 200, 300, 400])">
+                            <strong>[100, 200, 300, 400]</strong>
+                            <small>Large numbers</small>
+                        </div>
+                        <div class="example-item" onclick="loadExample([1.5, 3.0, 4.5, 6.0])">
+                            <strong>[1.5, 3.0, 4.5, 6.0]</strong>
+                            <small>Decimals</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🏰 Welcome to the Chamber of Echoes! May your predictions be ever accurate! 🔮</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">
+                <a href="#" onclick="showAbout(); return false;">About</a> | 
+                <a href="https://github.com/microsoft/CopilotAdventures" target="_blank">GitHub</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Modal for About -->
+    <div id="aboutModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAbout()">&times;</span>
+            <h2>About Echo Chamber</h2>
+            <p><strong>Version:</strong> 1.0.0</p>
+            <p><strong>Technology:</strong> Node.js + Express + Vanilla JavaScript</p>
+            <p><strong>Purpose:</strong> Learn arithmetic progressions through interactive puzzles</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>🔮 Predict next numbers in arithmetic sequences</li>
+                <li>📜 Store and review all predictions</li>
+                <li>🧪 Built-in test suite</li>
+                <li>⚡ Real-time validation</li>
+                <li>🎨 Beautiful web interface</li>
+            </ul>
+            <p style="margin-top: 1.5rem; color: #666;">
+                Built as part of <strong>CopilotAdventures</strong> by Microsoft
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal for Demo Test -->
+    <div id="testModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeTestModal()">&times;</span>
+            <h2>🧪 Demo Test Results</h2>
+            <div id="testResultsContainer"></div>
+            <button class="btn btn-primary" onclick="closeTestModal()" style="width: 100%; margin-top: 1rem;">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
